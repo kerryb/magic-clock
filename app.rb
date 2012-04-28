@@ -14,7 +14,7 @@ use Rack::Session::Pool, :expire_after => 86400 # 1 day
 before do
   @client = Google::APIClient.new
   @client.authorization.client_id = "362523634792.apps.googleusercontent.com"
-  @client.authorization.client_secret = ENV["CLIENT_SECRET"]
+  @client.authorization.client_secret = ENV["GOOGLE_CLIENT_SECRET"]
   @client.authorization.scope = "https://www.googleapis.com/auth/latitude.current.best"
   @client.authorization.redirect_uri = to("/oauth2callback")
   @client.authorization.code = params[:code] if params[:code]

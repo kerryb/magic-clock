@@ -6,6 +6,9 @@ GEM
       addressable (~> 2.2.3)
       extlib (>= 0.9.15)
       multi_json (>= 1.0.0)
+    bson (1.6.2)
+    bson_ext (1.6.2)
+      bson (~> 1.6.2)
     extlib (0.9.15)
     faraday (0.7.6)
       addressable (~> 2.2)
@@ -30,6 +33,8 @@ GEM
     launchy (2.1.0)
       addressable (~> 2.2.6)
     mime-types (1.18)
+    mongo (1.6.2)
+      bson (~> 1.6.2)
     multi_json (1.3.2)
     multipart-post (1.1.5)
     netrc (0.7.1)
@@ -54,6 +59,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bson_ext
   google-api-client
   heroku
+  mongo
   sinatra
