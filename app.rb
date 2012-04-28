@@ -58,5 +58,5 @@ end
 get "/" do
   result = @client.execute(:api_method => @latitude.current_location.get,
                            :parameters => {"granularity" => "best"})
-  data = result.response.body.methods.sort.join("<br />")
+  result.response.body
 end
