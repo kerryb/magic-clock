@@ -11,7 +11,7 @@ def save_token token
     access_token: token.access_token,
     expires_in: token.expires_in,
     issued_at: Time.at(token.issued_at)
-  )
+  ).to_s
 end
 
 def load_token id
