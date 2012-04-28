@@ -56,9 +56,8 @@ get "/oauth2callback" do
 end
 
 get "/" do
-  return @latitude.location.inspect
   result = @client.execute(
-    @latitude.something
+    @latitude.location granularity: "best"
   )
   status, _, _ = result.response
   [status, {"Content-Type" => "application/json"}, JSON.generate(result.data)]
