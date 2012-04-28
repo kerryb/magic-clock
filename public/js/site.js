@@ -3,6 +3,7 @@ function get_angle() {
     console.log("Received angle " + angle);
     $("#hand").css("-webkit-transform", "rotate(" + angle + "deg)");
   });
+  return true;
 }
 
 function poll() {
