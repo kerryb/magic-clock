@@ -1,5 +1,6 @@
 # Lovingly ripped off from http://code.google.com/p/google-api-ruby-client/wiki/OAuth2
 
+require "geokit"
 require "google/api_client"
 require "json"
 require "sinatra" 
