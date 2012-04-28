@@ -56,7 +56,7 @@ get "/oauth2callback" do
 end
 
 get "/" do
-  return load_token(session[:token_id]).inspect
+  return @latitude.methods.sort.join "<br />"
   result = @client.execute(
     @latitude.something
   )
