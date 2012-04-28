@@ -1,16 +1,2 @@
-require "uri"
-
-use Rack::Static, 
-  :urls => ["/stylesheets", "/images"],
-  :root => "public"
-
-run lambda { |env|
-  [
-    200, 
-    {
-      'Content-Type'  => 'text/html', 
-      'Cache-Control' => 'public, max-age=86400' 
-    },
-    File.open("public/#{env["REQUEST_PATH"]}", File::RDONLY)
-  ]
-}
+require File.expand_path("../app", __FILE__)
+run Sinatra::Application
