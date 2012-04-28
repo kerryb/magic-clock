@@ -56,7 +56,7 @@ get "/oauth2callback" do
 end
 
 get "/" do
-  return @latitude.discovered_methods.sort.join "<br />"
+  return @latitude.location.inspect
   result = @client.execute(
     @latitude.something
   )
