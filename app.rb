@@ -56,9 +56,8 @@ get "/oauth2callback" do
 end
 
 get "/" do
-  result = @client.execute(
-    @latitude.location
-  )
+  result = @client.execute(:api_method => @latitude.location,
+                           :parameters => {granularity: "best"})
   status, _, _ = result.response
   [status, {"Content-Type" => "application/json"}, JSON.generate(result.data)]
 end
