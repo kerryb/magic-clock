@@ -71,6 +71,21 @@ get "/angle" do
   lat = response["data"]["latitude"]
   long = response["data"]["longitude"]
 
+  Geokit::Geocoders::google = "AIzaSyCJoneApTKs_oywviwyIhRjqm-eke0tljs"
+  location = Geokit::Geocoders::YahooGeocoder.geocode "#{lat},#{long}"
+  home = Geokit::Geocoders::YahooGeocoder.geocode "IP4 5HA"
+  work = Geokit::Geocoders::YahooGeocoder.geocode "IP5 3RE"
+  pub = Geokit::Geocoders::YahooGeocoder.geocode "IP3 0AT"
+
   content_type "text/plain"
-  "60"
+
+  if location.distance_to home < 0.1
+    "-60"
+  elsif location.distance_to work < 0.1
+    "-20"
+  elsif location.distance_to pub < 0.1
+    "20"
+  else
+    "60"
+  end
 end
