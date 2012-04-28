@@ -22,6 +22,7 @@ body {
   top: 10px;
   left: 50%;
   margin-left: -75px;
+  -webkit-transform-origin: bottom;
 }
 
 #hand {
