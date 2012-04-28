@@ -1,6 +1,7 @@
 # Lovingly ripped off from http://code.google.com/p/google-api-ruby-client/wiki/OAuth2
 
 require "google/api_client"
+require "json"
 require "sinatra" 
 require "mongo"
 require "uri"
@@ -58,5 +59,8 @@ end
 get "/" do
   result = @client.execute(:api_method => @latitude.current_location.get,
                            :parameters => {"granularity" => "best"})
-  result.response.body
+  response = JSON.parse result.response.body
+  lat = response["data"]["latitude"]
+  long = response["data"]["longitude"]
+  "You are at #{lat}, #{long}."
 end
