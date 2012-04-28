@@ -38,14 +38,15 @@ end
 
 get "/oauth2callback" do
   @client.authorization.fetch_access_token!
+  session[:token] = token_pair
+  
   redirect to("/")
 end
 
 get "/" do
-  return session.map {|k,v| "#{k} => #{v}<br />" }
+  return session[:token].inspect
   result = @client.execute(
-    @latitude.activities.list,
-    {"userId" => "@me", "scope" => "@consumption", "alt"=> "json"}
+    @latitude.something
   )
   status, _, _ = result.response
   [status, {"Content-Type" => "application/json"}, JSON.generate(result.data)]
