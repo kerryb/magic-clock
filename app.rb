@@ -21,7 +21,7 @@ end
 
 use Rack::Session::Pool, :expire_after => 86400 # 1 day
 
-before do
+before "/" do
   uri = URI.parse(ENV["MONGOHQ_URL"])
   conn = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"])
   @db = conn.db(uri.path.gsub(/^\//, ""))
@@ -56,6 +56,10 @@ get "/oauth2callback" do
   redirect to("/")
 end
 
+get "/test" do
+  erb :index
+end
+
 get "/" do
   result = @client.execute(:api_method => @latitude.current_location.get,
                            :parameters => {"granularity" => "best"})
@@ -63,4 +67,5 @@ get "/" do
   lat = response["data"]["latitude"]
   long = response["data"]["longitude"]
   "You are at #{lat}, #{long}."
+  erb :index
 end

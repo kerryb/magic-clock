@@ -1,0 +1,39 @@
+body {
+  background-image: url('/images/background.png');
+  font-family: 'Mystery Quest', cursive;
+  font-size: 40px;
+}
+
+#clock {
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  background-color: rgba(230, 230, 180, 0.2);
+  border: 1px solid rgba(180, 180, 100, 0.5);
+  border-radius: 300px;
+}
+
+.location {
+  color: rgb(180, 120, 50);
+  position: absolute;
+  text-align: center;
+  width: 150px;
+  height: 300px;
+  top: 10px;
+  left: 50%;
+  margin-left: -75px;
+}
+
+#hand {
+  background-image: url('/images/hand.png');
+  background-repeat: none;
+  position: absolute;
+  text-align: center;
+  width: 36px;
+  height: 300px;
+  top: 20px;
+  left: 50%;
+  margin-left: -15px;
+  margin-top: 0;
+  border: 1px solid red;
+}
