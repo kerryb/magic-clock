@@ -3,7 +3,7 @@ function get_angle() {
     console.log("Received angle " + angle);
     $("#hand").css("-webkit-transform", "rotate(" + angle + "deg)");
   });
-  setTimeout("get_angle()", 30000);
+  setTimeout("get_angle()", 10000);
 }
 
 $(document).ready(function(){
