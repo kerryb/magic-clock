@@ -73,6 +73,7 @@ get "/angle" do
   long = response["data"]["longitude"]
 
   Geokit::Geocoders::google = "AIzaSyCJoneApTKs_oywviwyIhRjqm-eke0tljs"
+  Geokit::default_units = :miles
   location = Geokit::Geocoders::GoogleGeocoder.geocode "#{lat},#{long}"
   home = Geokit::Geocoders::GoogleGeocoder.geocode "IP4 5HA"
   work = Geokit::Geocoders::GoogleGeocoder.geocode "IP5 3RE"
@@ -80,7 +81,7 @@ get "/angle" do
 
   content_type "text/plain"
 
-  tolerance = 0.2
+  tolerance = 0.25
   if location.distance_to(home) < tolerance
     "-60"
   elsif location.distance_to(work) < tolerance
