@@ -57,7 +57,7 @@ end
 
 get "/" do
   #return @client.discovered_api('latitude').to_h.keys.join("<br />")
-  result = @client.execute @latitude.discovered_service("latitude.currentLocation.get"), {granularity: "best"}
+  result = @client.execute @client.discovered_service("latitude.currentLocation.get"), {granularity: "best"}
   status, _, _ = result.response
   [status, {"Content-Type" => "application/json"}, JSON.generate(result.data)]
 end
