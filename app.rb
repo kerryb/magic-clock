@@ -5,12 +5,8 @@ require "sinatra"
 require "mongo"
 require "uri"
 
-uri = URI.parse(ENV["MONGOHQ_URL"])
-conn = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"])
-db = conn.db(uri.path.gsub(/^\//, ""))
-
 def save_token token
-  db.tokens.save(
+  @db.tokens.save(
     refresh_token: token.refresh_token,
     access_token: token.access_token,
     expires_in: token.expires_in,
@@ -19,12 +15,16 @@ def save_token token
 end
 
 def load_token id
-  db.tokens.find id
+  @db.tokens.find id
 end
 
 use Rack::Session::Pool, :expire_after => 86400 # 1 day
 
 before do
+  uri = URI.parse(ENV["MONGOHQ_URL"])
+  conn = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"])
+  @db = conn.db(uri.path.gsub(/^\//, ""))
+
   @client = Google::APIClient.new
   @client.authorization.client_id = "362523634792.apps.googleusercontent.com"
   @client.authorization.client_secret = ENV["GOOGLE_CLIENT_SECRET"]
