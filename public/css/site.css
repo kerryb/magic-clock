@@ -27,14 +27,24 @@ body {
 
 #hand {
   background-image: url('/images/hand.png');
-  background-repeat: none;
+  background-repeat: no-repeat;
+  background-position: 12px top;
   position: absolute;
   text-align: center;
-  width: 36px;
+  width: 60px;
   height: 300px;
   top: 20px;
   left: 50%;
-  margin-left: -15px;
+  margin-left: -30px;
   margin-top: 0;
-  border: 1px solid red;
+}
+
+#face {
+  height: 60px;
+  width: 60px;
+  background-image: url('/images/avatar.png');
+  border: 1px solid rgb(180, 120, 50);
+  border-radius: 30px;
+  position: relative;
+  top: 60px;
 }
