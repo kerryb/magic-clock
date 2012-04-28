@@ -56,9 +56,6 @@ get "/oauth2callback" do
 end
 
 get "/" do
-  return @latitude.methods.sort.join("<br />")
-  #return @client.discovered_api('latitude').to_h.keys.join("<br />")
-  #result = @client.execute @client.discovered_method("latitude.currentLocation.get", "v1"), {granularity: "best"}
   result = @client.execute(:api_method => @latitude.current_location.get,
                            :parameters => {"granularity" => "best"})
   status, _, _ = result.response
