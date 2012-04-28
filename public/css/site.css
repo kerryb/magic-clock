@@ -71,3 +71,13 @@ body {
   position: relative;
   top: 80px;
 }
+
+#label {
+  font-size: 60px;
+  text-align: center;
+  position: absolute;
+  width: 300px;
+  top: 400px;
+  left: 50%;
+  margin-left: -150px;
+}
