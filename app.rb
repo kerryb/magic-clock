@@ -15,7 +15,7 @@ def save_token token
 end
 
 def load_token id
-  @db["tokens"].find id
+  @db["tokens"].find_one BSON::ObjectId(id)
 end
 
 use Rack::Session::Pool, :expire_after => 86400 # 1 day
