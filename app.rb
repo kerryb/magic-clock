@@ -57,7 +57,7 @@ end
 
 get "/" do
   result = @client.execute(
-    @latitude.location granularity: "best"
+    @latitude.location
   )
   status, _, _ = result.response
   [status, {"Content-Type" => "application/json"}, JSON.generate(result.data)]
