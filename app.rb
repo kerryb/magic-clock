@@ -6,7 +6,7 @@ require "mongo"
 require "uri"
 
 def save_token token
-  @db.tokens.save(
+  @db["tokens"].save(
     refresh_token: token.refresh_token,
     access_token: token.access_token,
     expires_in: token.expires_in,
@@ -15,7 +15,7 @@ def save_token token
 end
 
 def load_token id
-  @db.tokens.find id
+  @db["tokens"].find id
 end
 
 use Rack::Session::Pool, :expire_after => 86400 # 1 day
