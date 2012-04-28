@@ -38,7 +38,7 @@ body {
   margin-left: -30px;
   margin-top: 0;
   -webkit-transform-origin: 50% 96%;
-  -webkit-transition: -webkit-transform 2 ease-in-out;
+  -webkit-transition: -webkit-transform 2s ease-in-out;
 }
 
 #face {
