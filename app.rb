@@ -73,10 +73,10 @@ get "/angle" do
   long = response["data"]["longitude"]
 
   Geokit::Geocoders::google = "AIzaSyCJoneApTKs_oywviwyIhRjqm-eke0tljs"
-  location = Geokit::Geocoders::YahooGeocoder.geocode "#{lat},#{long}"
-  home = Geokit::Geocoders::YahooGeocoder.geocode "IP4 5HA"
-  work = Geokit::Geocoders::YahooGeocoder.geocode "IP5 3RE"
-  pub = Geokit::Geocoders::YahooGeocoder.geocode "IP3 0AT"
+  location = Geokit::Geocoders::GoogleGeocoder.geocode "#{lat},#{long}"
+  home = Geokit::Geocoders::GoogleGeocoder.geocode "IP4 5HA"
+  work = Geokit::Geocoders::GoogleGeocoder.geocode "IP5 3RE"
+  pub = Geokit::Geocoders::GoogleGeocoder.geocode "IP3 0AT"
 
   content_type "text/plain"
 
