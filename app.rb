@@ -38,7 +38,7 @@ end
 
 get "/oauth2callback" do
   @client.authorization.fetch_access_token!
-  redirect_to "/"
+  redirect to("/")
 end
 
 get "/" do
