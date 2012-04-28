@@ -22,7 +22,7 @@ end
 use Rack::Session::Pool, :expire_after => 86400 # 1 day
 
 before do
-  return if request.path_info == "/test"
+  return
   uri = URI.parse(ENV["MONGOHQ_URL"])
   conn = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"])
   @db = conn.db(uri.path.gsub(/^\//, ""))
@@ -68,4 +68,9 @@ get "/" do
   lat = response["data"]["latitude"]
   long = response["data"]["longitude"]
   erb :index
+end
+
+get "/angle" do
+  content_type "text/plain"
+  "-60"
 end
