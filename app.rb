@@ -42,7 +42,7 @@ end
 
 get "/oauth2callback" do
   @client.authorization.fetch_access_token!
-  session[:token] = @client.authorization.to_hash
+  session[:token] = @client.authorization
   
   redirect to("/")
 end
