@@ -9,6 +9,19 @@ uri = URI.parse(ENV["MONGOHQ_URL"])
 conn = Mongo::Connection.from_uri(ENV["MONGOHQ_URL"])
 db = conn.db(uri.path.gsub(/^\//, ""))
 
+def save_token token
+  db.tokens.save(
+    refresh_token: token.refresh_token,
+    access_token: token.access_token,
+    expires_in: token.expires_in,
+    issued_at: Time.at(token.issued_at)
+  )["id"]
+end
+
+def load_token id
+  db.tokens.find id
+end
+
 use Rack::Session::Pool, :expire_after => 86400 # 1 day
 
 before do
@@ -18,14 +31,9 @@ before do
   @client.authorization.scope = "https://www.googleapis.com/auth/latitude.current.best https://www.googleapis.com/auth/userinfo.profile"
   @client.authorization.redirect_uri = to("/oauth2callback")
   @client.authorization.code = params[:code] if params[:code]
-  token = session[:token]
-  if token
-    @client.authorization.update_token!(
-      refresh_token: token.refresh_token,
-      access_token: token.access_token,
-      expires_in: token.expires_in,
-      issued_at: Time.at(token.issued_at)
-    )
+  token_id = session[:token_id]
+  if token_id
+    @client.authorization.update_token! load_token(token_id)
   end
   if @client.authorization.refresh_token && @client.authorization.expired?
     @client.authorization.fetch_access_token!
@@ -42,13 +50,13 @@ end
 
 get "/oauth2callback" do
   @client.authorization.fetch_access_token!
-  session[:token] = @client.authorization
+  session[:token_id] = save_token @client.authorization
   
   redirect to("/")
 end
 
 get "/" do
-  return session[:token].inspect
+  return load_token(session[:token_id]).inspect
   result = @client.execute(
     @latitude.something
   )
