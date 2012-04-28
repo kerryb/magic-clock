@@ -18,10 +18,8 @@ before do
   @client.authorization.scope = "https://www.googleapis.com/auth/latitude.current.best"
   @client.authorization.redirect_uri = to("/oauth2callback")
   @client.authorization.code = params[:code] if params[:code]
-  if session[:token_id]
-    # Load the access token here if it's available
-    token_pair = TokenPair.get(session[:token_id])
-    @client.authorization.update_token!(token_pair.to_hash)
+  if session[:token]
+    @client.authorization.update_token!(session[:token])
   end
   if @client.authorization.refresh_token && @client.authorization.expired?
     @client.authorization.fetch_access_token!
