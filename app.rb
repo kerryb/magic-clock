@@ -38,7 +38,7 @@ before do
   if @client.authorization.refresh_token && @client.authorization.expired?
     @client.authorization.fetch_access_token!
   end
-  @latitude = @client.discovered_api("latitude")
+  @latitude = @client.discovered_api("latitude", "v1")
   unless @client.authorization.access_token || request.path_info =~ /^\/oauth2/
     redirect to("/oauth2authorize")
   end
@@ -56,8 +56,11 @@ get "/oauth2callback" do
 end
 
 get "/" do
+  return @latitude.location.methods.sort.join("<br />")
   #return @client.discovered_api('latitude').to_h.keys.join("<br />")
-  result = @client.execute @client.discovered_method("latitude.currentLocation.get", "v1"), {granularity: "best"}
+  #result = @client.execute @client.discovered_method("latitude.currentLocation.get", "v1"), {granularity: "best"}
+  result = @client.execute(:api_method => @latitude.location,
+                           :parameters => {granularity: "best"})
   status, _, _ = result.response
   [status, {"Content-Type" => "application/json"}, JSON.generate(result.data)]
 end
