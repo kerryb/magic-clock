@@ -38,11 +38,11 @@ end
 
 get "/oauth2callback" do
   @client.authorization.fetch_access_token!
-  "Seems to have worked!"
+  redirect_to "/"
 end
 
 get "/" do
-  return "Index"
+  return session.map {|k,v| "#{k} => #{v}<br />" }
   result = @client.execute(
     @latitude.activities.list,
     {"userId" => "@me", "scope" => "@consumption", "alt"=> "json"}
