@@ -17,7 +17,6 @@ before do
   @client.authorization.client_secret = ENV["GOOGLE_CLIENT_SECRET"]
   @client.authorization.scope = "https://www.googleapis.com/auth/latitude.current.best https://www.googleapis.com/auth/userinfo.profile"
   @client.authorization.redirect_uri = to("/oauth2callback")
-  @client.authorization.access_type = "offline"
   @client.authorization.code = params[:code] if params[:code]
   token = session[:token]
   if token
