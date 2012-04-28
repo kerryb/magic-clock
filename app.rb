@@ -80,11 +80,11 @@ get "/angle" do
 
   content_type "text/plain"
 
-  if location.distance_to home < 0.1
+  if location.distance_to(home) < 0.1
     "-60"
-  elsif location.distance_to work < 0.1
+  elsif location.distance_to(work) < 0.1
     "-20"
-  elsif location.distance_to pub < 0.1
+  elsif location.distance_to(pub) < 0.1
     "20"
   else
     "60"
